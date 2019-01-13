@@ -11,5 +11,6 @@ setup(name='textExaminer',
       packages=['textProcessing'],
       install_requires=[
           'requests',
+          'lxml',
       ],
       zip_safe=False)

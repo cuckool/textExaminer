@@ -1,5 +1,5 @@
 import requests
-
+from lxml import html
 
 def get_webpage_content(url: str, auth: tuple = False):
     """
@@ -9,9 +9,10 @@ def get_webpage_content(url: str, auth: tuple = False):
     :return:
     """
     req = requests.get(url=url, auth=auth) if auth else requests.get(url=url)
-    return req.text, req.json()
+    for line in html.fromstring(req.content).text_content().splitlines():
+        yield line
 
 
 if __name__ == '__main__':
-    a = get_webpage_content('https://fr.wikipedia.org/wiki/Samuel_L._Jackson')
-    print(a)
+    for a in get_webpage_content('https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string'):
+        print(a)

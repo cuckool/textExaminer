@@ -1,4 +1,5 @@
 import operator
+import re
 
 class WordCounter:
     def __init__(self, words: bool, letters: bool):
@@ -11,6 +12,8 @@ class WordCounter:
             self.processing_function.append(self.letters_counting)
 
     def process(self, line):
+        #to clean the inputs
+        line = re.sub(pattern=r"[\W\d_]", repl=' ', string=line, flags=re.UNICODE)
         for func in self.processing_function:
             func(line[:])
 

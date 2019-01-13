@@ -1,5 +1,4 @@
 import locale
-import re
 
 def open_file_simple(filename, **options):
     """
@@ -12,7 +11,7 @@ def open_file_simple(filename, **options):
     with open(file=filename, mode='r', encoding=options.get('encoding', get_default_encoding())) as f:
         content = f.readline().lower()
         while content:
-            yield re.sub(pattern=r"[\W\d_]", repl=' ', string=content, flags=re.UNICODE)
+            yield content
             content = f.readline().lower()
 
 
