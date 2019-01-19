@@ -1,18 +1,21 @@
 import operator
 import re
 
+
 class WordCounter:
     def __init__(self, words: bool, letters: bool):
         self.processing_function = []
         if words is True:
             self.words = dict()
             self.processing_function.append(self.words_counting)
+            self.words_nb = 0
         if letters is True:
             self.letters = dict()
             self.processing_function.append(self.letters_counting)
+            self.letters_nb = 0
 
     def process(self, line):
-        #to clean the inputs
+        # to clean the inputs
         line = re.sub(pattern=r"[\W\d_]", repl=' ', string=line, flags=re.UNICODE)
         for func in self.processing_function:
             func(line[:])
@@ -25,17 +28,20 @@ class WordCounter:
         remain.
         """
         for w in line.split():
+            self.words_nb += 1
             if w in self.words:
                 self.words[str(w)] += 1
             else:
                 self.words[str(w)] = 1
-#METTRE LES COUNTINGS EN PRIVATE !!!!
+# METTRE LES COUNTINGS EN PRIVATE !!!!
+
     def letters_counting(self, line):
         """
         Add the letters in line to the dictionnary. Line must be stripped from ponctuation and numbers. Only letters must
         remain.
         """
         for le in line.replace(r' ', ''):
+            self.letters_nb += 1
             if str(le) in self.letters:
                 self.letters[str(le)] += 1
             else:
@@ -47,6 +53,6 @@ class WordCounter:
     def get_sorted_words(self):
         return sorted(self.words.items(), key=operator.itemgetter(1), reverse=True)
 
+
 if __name__ == '__main__':
     boi = WordCounter()
-
