@@ -13,5 +13,7 @@ setup(name='textExaminer',
           'requests',
           'lxml',
           'TwitterSearch',
+          'matplotlib',
+          'wordcloud'
       ],
       zip_safe=False)
