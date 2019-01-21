@@ -12,5 +12,6 @@ setup(name='textExaminer',
       install_requires=[
           'requests',
           'lxml',
+          'TwitterSearch',
       ],
       zip_safe=False)
